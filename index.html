@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playbook — Proyecto Leyendas</title>
+<meta name="description" content="Playbook digital del Proyecto Leyendas — concepto, construcción de marca, insignias y premiaciones.">
+
+<!-- Tipografía: Chakra Petch (Bold para títulos, Regular para el resto de los textos), cargada localmente desde Resource/ -->
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+<script src="script.js" defer></script>
+</head>
+<body class="intro-active">
+
+<!-- ================= SPRITE DE ICONOS ================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="icon-menu" viewBox="0 0 24 24">
+      <path d="M3 6h18M3 12h18M3 18h18"/>
+    </symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24">
+      <path d="M4 4l16 16M20 4L4 20"/>
+    </symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24">
+      <path d="M12 3v13M6 11l6 6 6-6"/>
+      <path d="M4 20h16"/>
+    </symbol>
+    <symbol id="icon-network" viewBox="0 0 24 24">
+      <circle cx="5" cy="12" r="2.6"/>
+      <circle cx="18" cy="5.5" r="2.6"/>
+      <circle cx="18" cy="18.5" r="2.6"/>
+      <path d="M7.3 10.8L15.7 6.8M7.3 13.2L15.7 17.2"/>
+    </symbol>
+    <symbol id="icon-growth" viewBox="0 0 24 24">
+      <path d="M3 17l6-6 4 4 8-9"/>
+      <path d="M15 6h6v6"/>
+    </symbol>
+    <symbol id="icon-target" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <circle cx="12" cy="12" r="5"/>
+      <circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24">
+      <path d="M12 2l8 3.5v6c0 5-3.5 8.5-8 10.5-4.5-2-8-5.5-8-10.5v-6L12 2z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ================= FILTRO LIQUID GLASS — distorsiona lo que hay detrás del panel ================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="liquid-glass-distort" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.010 0.014" numOctaves="2" seed="6" result="noise"/>
+    <feGaussianBlur in="noise" stdDeviation="3" result="softNoise"/>
+    <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="30" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<!-- ================= MENÚ SUPERIOR — barra fija con logo central ================= -->
+<header class="top-nav">
+  <nav class="top-nav-links top-nav-links--left" aria-label="Secciones (parte 1)">
+    <a href="#que-es-leyendas">Qué es</a>
+    <a href="#objetivos-comerciales">Objetivos</a>
+    <a href="#concepto">Concepto</a>
+    <a href="#video-manifiesto">Manifiesto</a>
+  </nav>
+
+  <a href="#hero" aria-label="Inicio">
+    <img src="Resource/logo-leyendas-h.png" alt="Leyendas">
+  </a>
+
+  <nav class="top-nav-links top-nav-links--right" aria-label="Secciones (parte 2)">
+    <a href="#linea-visual">Línea Visual</a>
+    <a href="#tramas">Tramas</a>
+    <a href="#insignias">Insignias</a>
+    <a href="#experiencia">Premiaciones</a>
+  </nav>
+</header>
+
+<!-- ================= MENÚ FLOTANTE — solo versión móvil (checkbox hack, sin JS) ================= -->
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-backdrop" aria-hidden="true"></label>
+
+<div class="nav-fab-wrap">
+  <label for="nav-toggle" class="nav-fab" aria-label="Abrir menú de navegación">
+    <svg class="icon icon-open"><use href="#icon-menu"/></svg>
+    <svg class="icon icon-shut"><use href="#icon-close"/></svg>
+  </label>
+
+  <nav class="nav-menu" aria-label="Navegación de secciones">
+    <span class="nav-menu-eyebrow">Índice</span>
+    <a href="#que-es-leyendas">¿Qué es Leyendas?</a>
+    <a href="#objetivos-comerciales">Objetivos comerciales</a>
+    <a href="#concepto">Concepto de Marca</a>
+    <a href="#video-manifiesto">Video Manifiesto</a>
+    <a href="#linea-visual">Línea Visual</a>
+    <a href="#tramas">Tramas</a>
+    <a href="#insignias">Insignias</a>
+    <a href="#experiencia">Experiencia</a>
+    <a href="#premiaciones">Premiaciones</a>
+    <a href="#aplicaciones">Aplicaciones</a>
+  </nav>
+</div>
+
+
+<!-- ================= HERO — pantalla principal / INTRO, fuera del flujo del playbook ================= -->
+<section id="hero" class="hero">
+
+  <!-- Video de fondo en bucle: se reproduce hasta que se ingresa al mundo Leyendas -->
+  <video class="hero-bg-video" autoplay muted loop playsinline poster="Resource/leyendas-poster.jpg">
+    <source src="Resource/Vid_Intro.mp4" type="video/mp4">
+  </video>
+
+  <button type="button" id="hero-enter" class="btn-liquid-glass hud-frame">
+    <span>Ingresar al mundo Leyendas</span>
+    <span class="hud-corner hud-corner--tl" aria-hidden="true"></span>
+    <span class="hud-corner hud-corner--br" aria-hidden="true"></span>
+  </button>
+
+</section>
+
+<!-- ================= PLAYBOOK — el contenido del proyecto se construye a partir de aquí ================= -->
+<div id="playbook">
+
+<!-- ================= ¿QUÉ ES LEYENDAS? — imagen de fondo + ventana glass HUD ================= -->
+<section id="que-es-leyendas" class="section showcase">
+  <div class="showcase-frame">
+    <video class="showcase-bg" autoplay muted loop playsinline poster="Resource/fondo-que-es-leyendas.png">
+      <source src="Resource/Tomas Armaduras Close Up-MIN.mp4" type="video/mp4">
+    </video>
+
+    <div class="showcase-window glass-panel hud-frame reveal-image">
+      <span class="eyebrow">Leyendas</span>
+      <h2 class="showcase-title">¿Qué es<br>Leyendas?</h2>
+      <p class="showcase-text">[Texto pendiente: reemplaza este párrafo con la descripción real del proyecto Leyendas — qué es, a quién convoca y qué rol cumple dentro del ecosistema Dropi.]</p>
+      <span class="hud-corner hud-corner--tl" aria-hidden="true"></span>
+      <span class="hud-corner hud-corner--br" aria-hidden="true"></span>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider" aria-hidden="true"><span></span></div>
+
+<!-- ================= OBJETIVOS COMERCIALES — 3 tarjetas, sin modal ================= -->
+<section id="objetivos-comerciales" class="section glow-surface">
+  <div class="section-head">
+    <h2 class="section-title reveal-fade">Objetivos<br>Comerciales</h2>
+  </div>
+
+  <div class="objetivos-grid">
+    <div class="objetivo-card hud-frame reveal-fade">
+      <span class="objetivo-num">01</span>
+      <span class="objetivo-bar"></span>
+      <svg class="icon objetivo-icon"><use href="#icon-network"/></svg>
+      <h3 class="objetivo-title">[Fidelizar comunidad]</h3>
+      <p class="objetivo-text">[Descripción pendiente: qué busca lograr este objetivo dentro del ecosistema Leyendas.]</p>
+      <span class="hud-corner hud-corner--tl" aria-hidden="true"></span>
+      <span class="hud-corner hud-corner--br" aria-hidden="true"></span>
+    </div>
+
+    <div class="objetivo-card objetivo-card--feat hud-frame reveal-fade">
+      <span class="objetivo-num">02</span>
+      <span class="objetivo-bar"></span>
+      <svg class="icon objetivo-icon"><use href="#icon-growth"/></svg>
+      <h3 class="objetivo-title">[Impulsar ventas]</h3>
+      <p class="objetivo-text">[Descripción pendiente: meta comercial concreta que persigue Leyendas.]</p>
+      <span class="hud-corner hud-corner--tl" aria-hidden="true"></span>
+      <span class="hud-corner hud-corner--br" aria-hidden="true"></span>
+    </div>
+
+    <div class="objetivo-card hud-frame reveal-fade">
+      <span class="objetivo-num">03</span>
+      <span class="objetivo-bar"></span>
+      <svg class="icon objetivo-icon"><use href="#icon-target"/></svg>
+      <h3 class="objetivo-title">[Posicionar la marca]</h3>
+      <p class="objetivo-text">[Descripción pendiente: qué percepción de marca busca instalar Leyendas.]</p>
+      <span class="hud-corner hud-corner--tl" aria-hidden="true"></span>
+      <span class="hud-corner hud-corner--br" aria-hidden="true"></span>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider" aria-hidden="true"><span></span></div>
+
+<!-- ================= CONCEPTO DE MARCA ================= -->
+<section id="concepto" class="section glow-surface">
+  <div class="concepto-grid">
+    <div class="reveal-fade">
+      <span class="eyebrow">Concepto</span>
+      <h2 class="concepto-statement" style="margin-top:18px;">[Tagline<br>pendiente<br>de <em>Leyendas</em>]</h2>
+      <p class="concepto-desc">[Párrafo pendiente: la idea central del concepto de marca, en qué se inspira y qué historia cuenta.]</p>
+    </div>
+
+    <div class="concepto-pillars reveal-fade">
+      <div class="concepto-pillar">
+        <svg class="icon concepto-pillar-icon"><use href="#icon-network"/></svg>
+        <div class="concepto-pillar-text">
+          <span class="concepto-pillar-label">Pilar 01</span>
+          <span class="concepto-pillar-value">[Valor o principio pendiente]</span>
+        </div>
+      </div>
+      <div class="concepto-pillar">
+        <svg class="icon concepto-pillar-icon"><use href="#icon-growth"/></svg>
+        <div class="concepto-pillar-text">
+          <span class="concepto-pillar-label">Pilar 02</span>
+          <span class="concepto-pillar-value">[Valor o principio pendiente]</span>
+        </div>
+      </div>
+      <div class="concepto-pillar">
+        <svg class="icon concepto-pillar-icon"><use href="#icon-target"/></svg>
+        <div class="concepto-pillar-text">
+          <span class="concepto-pillar-label">Pilar 03</span>
+          <span class="concepto-pillar-value">[Valor o principio pendiente]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VIDEO MANIFIESTO — full-bleed ================= -->
+<section id="video-manifiesto" class="section video-manifiesto">
+  <video class="video-manifiesto-media" autoplay muted loop playsinline poster="Resource/poster-video-manifiesto.jpg">
+    <source src="Resource/Tomas Armaduras General - MIN.mp4" type="video/mp4">
+  </video>
+  <div class="video-manifiesto-content reveal-fade">
+    <span class="eyebrow">Manifiesto</span>
+    <h2 class="video-manifiesto-title">[Título del manifiesto pendiente]</h2>
+  </div>
+</section>
+
+<div class="section-divider" aria-hidden="true"><span></span></div>
+
+<!-- ================= LÍNEA VISUAL — logo, variaciones, construcción, paleta, tipografía ================= -->
+<section id="linea-visual" class="section glow-surface">
+  <div class="section-head">
+    <h2 class="section-title reveal-fade">Línea Visual</h2>
+  </div>
+
+  <h3 class="subsection-title" style="margin-top:0;">Logo Principal</h3>
+  <div class="logo-showcase glass-panel hud-frame reveal-image">
+    <img src="Resource/logo-leyendas-2.png" alt="Logo Leyendas">
+    <span class="hud-corner hud-corner--tl" aria-hidden="true"></span>
+    <span class="hud-corner hud-corner--br" aria-hidden="true"></span>
+  </div>
+
+  <h3 class="subsection-title">Variaciones del Logo</h3>
+  <div class="logo-variants-grid reveal-fade">
+   
+    <div class="logo-variant-card logo-variant-card--light">
+      <img src="Resource/logo-leyendas-3.png" alt="Logo monocromo sobre claro">
+      <span class="logo-variant-label">Sobre claro</span>
+    </div>
+    <div class="logo-variant-card logo-variant-card--dark">
+      <img src="Resource/logo-leyendas-1.png" alt="Logo monocromo sobre oscuro">
+      <span class="logo-variant-label">Sobre oscuro</span>
+    </div>
+  </div>
+
+  <h3 class="subsection-title">Construcción del Logo</h3>
+  <div class="logo-construction reveal-image">
+    <svg class="logo-construction-svg" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <style>
+          .st0 { stroke-dasharray: 1.97 1.97; }
+          .st0, .st1, .st2, .st3 { fill: none; stroke-miterlimit: 10; }
+          .st0, .st1, .st3 { stroke: #ff7f0b; stroke-width: 2px; }
+          .st4 { font-size: 73.68px; }
+          .st4, .st5 { fill: #fff; }
+          .st4, .st5, .st2 { font-family: 'Rationale', sans-serif; }
+          .st5 { font-size: 37.09px; }
+          .st1 { stroke-dasharray: 2; }
+          .st2 { font-size: 304.4px; letter-spacing: .3em; stroke: #fff; }
+        </style>
+      </defs>
+
+      <!-- Logotipo: siempre visible -->
+      <text class="st2" transform="translate(7.41 577.38)"><tspan x="0" y="0">LEYENDAS</tspan></text>
+
+      <!-- Cotas de construcción: visibles en hover, "respiran" cuando no hay cursor -->
+      <g class="construction-marks">
+        <text class="st5" transform="translate(901.22 868.75)"><tspan x="0" y="0">Interletrado</tspan></text>
+        <text class="st4" transform="translate(898.81 825.65)"><tspan x="0" y="0">300 pts.</tspan></text>
+        <text class="st4" transform="translate(1611.9414 260.7529)"><tspan x="0" y="0">Mayúsculas</tspan></text>
+        <line class="st3 logo-draw" x1="551.8" y1="300.36" x2="551.8" y2="648.18" style="stroke-dasharray:347.82; stroke-dashoffset:347.82;"/>
+        <line class="st3 logo-draw" x1="667.75" y1="300.36" x2="667.75" y2="648.18" style="stroke-dasharray:347.82; stroke-dashoffset:347.82;"/>
+        <g>
+          <line class="st3 logo-draw" x1="554.47" y1="637.19" x2="555.47" y2="637.19" style="stroke-dasharray:1; stroke-dashoffset:1;"/>
+          <line class="st0 logo-draw" x1="557.44" y1="637.19" x2="662.76" y2="637.19" style="stroke-dasharray:105.32; stroke-dashoffset:105.32;"/>
+          <line class="st3 logo-draw" x1="663.75" y1="637.19" x2="664.75" y2="637.19" style="stroke-dasharray:1; stroke-dashoffset:1;"/>
+        </g>
+        <polyline class="st1 logo-draw" points="609.61 637.19 609.61 831.96 895.3 831.96" style="stroke-dasharray:480.46; stroke-dashoffset:480.46;"/>
+        <polyline class="st1 logo-draw" points="1593.6 236.39 1133.84 236.39 1133.84 320.35" style="stroke-dasharray:543.72; stroke-dashoffset:543.72;"/>
+      </g>
+    </svg>
+  </div>
+
+  <h3 class="subsection-title">Paleta de Colores</h3>
+  <div class="color-swatches reveal-fade">
+    <div class="color-swatch color-swatch--black">
+      <span class="color-swatch-name">Blanco Iniciado</span>
+      <span class="color-swatch-hex">#EAEAEA</span>
+    </div>
+    <div class="color-swatch color-swatch--panel">
+      <span class="color-swatch-name">Gris Experto</span>
+      <span class="color-swatch-hex">#191919</span>
+    </div>
+    <div class="color-swatch color-swatch--orange">
+      <span class="color-swatch-name">Naranja Maestro</span>
+      <span class="color-swatch-hex">#FF8500</span>
+    </div>
+    <div class="color-swatch color-swatch--flame">
+      <span class="color-swatch-name">Flama Sabia</span>
+      <span class="color-swatch-hex">#FF4800</span>
+    </div>
+    <div class="color-swatch color-swatch--rojo">
+      <span class="color-swatch-name">Rojo Leyenda</span>
+      <span class="color-swatch-hex">#FF0000</span>
+    </div>
+  </div>
+
+  <h3 class="subsection-title">Tipografías</h3>
+  <div class="type-specimens reveal-fade">
+    <div class="type-specimen type-specimen--bold">
+      <span class="type-specimen-glyph">Aa</span>
+      <span class="type-specimen-name">Chakra Petch — Bold</span>
+      <p class="type-specimen-sample">Para todos los títulos, encabezados y palabras clave.</p>
+    </div>
+    <div class="type-specimen type-specimen--regular">
+      <span class="type-specimen-glyph">Aa</span>
+      <span class="type-specimen-name">Chakra Petch — Regular</span>
+      <p class="type-specimen-sample">Para el resto de los textos: párrafos, descripciones y etiquetas.</p>
+    </div>
+    <div class="type-specimen type-specimen--regular">
+      <span class="type-specimen-Rat">Aa</span>
+      <span class="type-specimen-name">Rationale — Regular</span>
+      <p class="type-specimen-sample">Para uso exclusivo del logo.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider" aria-hidden="true"><span></span></div>
+
+<!-- ================= TRAMAS — patrones de marca ================= -->
+<section id="tramas" class="section glow-surface">
+  <div class="section-head">
+    <h2 class="section-title reveal-fade">Tramas</h2>
+  </div>
+  <p class="section-intro reveal-fade">Patrones gráficos derivados de la paleta de marca, listos para aplicar en piezas y espacios.</p>
+
+  <div class="tramas-grid">
+    <div class="pattern-card reveal-image">
+      <video class="showcase-bg" autoplay muted loop playsinline poster="Resource/fondo-que-es-leyendas.png">
+        <source src="Resource/tramado-1.mp4" type="video/mp4">
+      </video>
+      <span class="pattern-label">Trama 01 — Isométrica</span>
+    </div>
+    <div class="pattern-card reveal-image">
+      <video class="showcase-bg" autoplay muted loop playsinline poster="Resource/fondo-que-es-leyendas.png">
+        <source src="Resource/tramado-2.mp4" type="video/mp4">
+      </video>
+      <span class="pattern-label">Trama 02 — Facetada</span>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider" aria-hidden="true"><span></span></div>
+
+<!-- ================= INSIGNIAS — efecto cortina ================= -->
+<section id="insignias" class="section glow-surface">
+  <div class="section-head">
+    <h2 class="section-title reveal-fade">Insignias</h2>
+  </div>
+  <p class="section-intro reveal-fade">Pasa el cursor sobre cada insignia para ver el detalle de su rango.</p>
+
+  <div class="insignias-strip reveal-image">
+    <div class="insignia-card" tabindex="0">
+      <div class="insignia-bg-stack">
+        <img class="insignia-bg" src="Resource/Insignias/1.png" alt="">
+        <img class="insignia-bg" src="Resource/Insignias/1_2.png" alt="">
+        <img class="insignia-bg" src="Resource/Insignias/1_3.png" alt="">
+        <div class="insignia-sweep" aria-hidden="true"></div>
+      </div>
+      <div class="insignia-content">
+        <svg class="icon insignia-icon"><use href="#icon-shield"/></svg>
+        <span class="insignia-name">INICIADO</span>
+        <span class="insignia-rank">Rango 01</span>
+        <p class="insignia-desc">[Descripción pendiente de la insignia Bronce: requisitos y beneficios.]</p>
+        <div class="insignia-subranks" aria-label="Sub-rangos de Iniciado">
+          <span class="insignia-subrank is-active" data-target="0">I</span>
+          <span class="insignia-subrank" data-target="1">II</span>
+          <span class="insignia-subrank" data-target="2">III</span>
+        </div>
+      </div>
+    </div>
+    <div class="insignia-card" tabindex="0">
+      <div class="insignia-bg-stack">
+        <img class="insignia-bg" src="Resource/Insignias/2.png" alt="">
+        <img class="insignia-bg" src="Resource/Insignias/2_2.png" alt="">
+        <img class="insignia-bg" src="Resource/Insignias/2_3.png" alt="">
+        <div class="insignia-sweep" aria-hidden="true"></div>
+      </div>
+      <div class="insignia-content">
+        <svg class="icon insignia-icon"><use href="#icon-shield"/></svg>
+        <span class="insignia-name">EXPERTO</span>
+        <span class="insignia-rank">Rango 02</span>
+        <p class="insignia-desc">[Descripción pendiente de la insignia Plata: requisitos y beneficios.]</p>
+        <div class="insignia-subranks" aria-label="Sub-rangos de Experto">
+          <span class="insignia-subrank is-active" data-target="0">I</span>
+          <span class="insignia-subrank" data-target="1">II</span>
+          <span class="insignia-subrank" data-target="2">III</span>
+        </div>
+      </div>
+    </div>
+    <div class="insignia-card" tabindex="0">
+      <div class="insignia-bg-stack">
+        <img class="insignia-bg" src="Resource/Insignias/3.png" alt="">
+        <img class="insignia-bg" src="Resource/Insignias/3_2.png" alt="">
+        <div class="insignia-sweep" aria-hidden="true"></div>
+      </div>
+      <div class="insignia-content">
+        <svg class="icon insignia-icon"><use href="#icon-shield"/></svg>
+        <span class="insignia-name">MASTER</span>
+        <span class="insignia-rank">Rango 03</span>
+        <p class="insignia-desc">[Descripción pendiente de la insignia Oro: requisitos y beneficios.]</p>
+        <div class="insignia-subranks" aria-label="Sub-rangos de Master">
+          <span class="insignia-subrank is-active" data-target="0">I</span>
+          <span class="insignia-subrank" data-target="1">II</span>
+        </div>
+      </div>
+    </div>
+    <div class="insignia-card" tabindex="0">
+      <div class="insignia-bg-stack">
+        <img class="insignia-bg" src="Resource/Insignias/4.png" alt="">
+        <div class="insignia-sweep" aria-hidden="true"></div>
+      </div>
+      <div class="insignia-content">
+        <svg class="icon insignia-icon"><use href="#icon-shield"/></svg>
+        <span class="insignia-name">SABIO</span>
+        <span class="insignia-rank">Rango 04</span>
+        <p class="insignia-desc">[Descripción pendiente de la insignia Platino: requisitos y beneficios.]</p>
+        <div class="insignia-subranks" aria-label="Sub-rangos de Sabio">
+          <span class="insignia-subrank is-active" data-target="0">Única</span>
+        </div>
+      </div>
+    </div>
+    <div class="insignia-card" tabindex="0">
+      <div class="insignia-bg-stack">
+        <img class="insignia-bg" src="Resource/Insignias/5.png" alt="">
+        <div class="insignia-sweep" aria-hidden="true"></div>
+      </div>
+      <div class="insignia-content">
+        <svg class="icon insignia-icon"><use href="#icon-shield"/></svg>
+        <span class="insignia-name">LEYENDA</span>
+        <span class="insignia-rank">Rango 05</span>
+        <p class="insignia-desc">[Descripción pendiente de la insignia Leyenda: requisitos y beneficios.]</p>
+        <div class="insignia-subranks" aria-label="Sub-rangos de Leyenda">
+          <span class="insignia-subrank is-active" data-target="0">Única</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider" aria-hidden="true"><span></span></div>
+
+<!-- ================= EXPERIENCIA — grid de 4 imágenes ================= -->
+<section id="experiencia" class="section glow-surface">
+  <div class="section-head">
+    <h2 class="section-title reveal-fade">Premiación</h2>
+  </div>
+  <p class="section-intro reveal-fade">Premios otorgados a las personas por alcanzar las metas.</p>
+
+  <div class="experiencia-grid">
+    <div class="experiencia-card reveal-image">
+      <img src="Resource/experiencia-01.jpg" alt="Experiencia Leyendas 1">
+      <span class="experiencia-caption">01</span>
+    </div>
+    <div class="experiencia-card reveal-image">
+      <img src="Resource/experiencia-01.jpg" alt="Experiencia Leyendas 1">
+      <span class="experiencia-caption">02</span>
+    </div>
+    <div class="experiencia-card reveal-image">
+      <img src="Resource/Premios/Caja_B.jpeg" alt="Experiencia Leyendas 2">
+      <span class="experiencia-caption">03</span>
+    </div>
+    <div class="experiencia-card reveal-image">
+      <img src="Resource/Premios/Caja_O.jpeg" alt="Experiencia Leyendas 3">
+      <span class="experiencia-caption">04</span>
+    </div>
+    <div class="experiencia-card reveal-image">
+      <img src="Resource/Premios/Pin.jpeg" alt="Experiencia Leyendas 4">
+      <span class="experiencia-caption">05</span>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span class="footer-brand">Leyendas</span>
+  <!--<nav class="footer-links" aria-label="Enlaces legales">
+    <a href="#">Quiénes somos</a>
+    <a href="#">Términos y condiciones</a>
+    <a href="#">Términos legales</a>
+  </nav>-->
+  <p class="footer-copy">© Derechos reservados Dropi 2026</p>
+</footer>
+
+
+  <!--
+    Próximas secciones a desarrollar:
+    - Premiaciones
+    - Aplicaciones
+    - etc.
+  -->
+
+</div><!-- /#playbook -->
+
+</body>
+</html>
